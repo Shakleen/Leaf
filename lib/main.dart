@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leaf/view/pages/home_page.dart';
+import 'package:leaf/view/presentation/themes.dart';
 
 void main() => runApp(Leaf());
 
@@ -12,8 +13,12 @@ class Leaf extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.green,
         brightness: Brightness.light,
+        textTheme: TextTheme(
+          title: TextThemes.title,
+          subtitle: TextThemes.subtitle,
+          body1: TextThemes.body1,
+        ),
       ),
-
       home: HomePage(),
     );
   }
