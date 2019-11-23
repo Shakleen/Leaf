@@ -7,6 +7,9 @@ void main() {
   testWidgets("Testing PostCard widget", (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(home: PostCard()));
 
+    // Test: Finds GestureDetector
+    expect(find.byType(GestureDetector), findsOneWidget);
+
     // Test: Finds AspectRatio
     expect(find.byType(AspectRatio), findsOneWidget);
 

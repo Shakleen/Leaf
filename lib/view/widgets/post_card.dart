@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leaf/helper/demo_values.dart';
+import 'package:leaf/view/pages/post_page.dart';
 import 'package:leaf/view/presentation/themes.dart';
 
 bool _isLandscape(BuildContext context) =>
@@ -12,19 +13,28 @@ class PostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final double aspectRatio = _isLandscape(context) ? 6 / 2 : 6 / 3;
 
-    return AspectRatio(
-      aspectRatio: aspectRatio,
-      child: Card(
-        elevation: 2,
-        child: Container(
-          margin: const EdgeInsets.all(4.0),
-          padding: const EdgeInsets.all(4.0),
-          child: Column(
-            children: <Widget>[
-              _Post(),
-              Divider(color: Colors.grey),
-              _PostDetails(),
-            ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(
+          builder: (BuildContext context) {
+            return PostPage();
+          }
+        ));
+      },
+      child: AspectRatio(
+        aspectRatio: aspectRatio,
+        child: Card(
+          elevation: 2,
+          child: Container(
+            margin: const EdgeInsets.all(4.0),
+            padding: const EdgeInsets.all(4.0),
+            child: Column(
+              children: <Widget>[
+                _Post(),
+                Divider(color: Colors.grey),
+                _PostDetails(),
+              ],
+            ),
           ),
         ),
       ),
