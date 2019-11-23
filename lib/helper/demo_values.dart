@@ -6,4 +6,6 @@ class DemoValues {
   static final String postTime = "30 April, 2019";
   static final String postTitle = "Maple Trees";
   static final String postSummary = "A comparative study of maple leaves and other plants";
+  static final int postReacts = 123;
+  static final int postViews = 456;
 }

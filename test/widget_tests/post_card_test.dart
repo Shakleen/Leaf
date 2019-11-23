@@ -19,6 +19,12 @@ void main() {
     // Test: Finds Image
     expect(find.byType(Image), findsOneWidget);
 
+    // Test: Finds react icon
+    expect(find.byIcon(Icons.favorite), findsOneWidget);
+
+    // Test: Finds view icon
+    expect(find.byIcon(Icons.remove_red_eye), findsOneWidget);
+
     // Test: Find text user name
     expect(find.text(DemoValues.userName), findsOneWidget);
 
@@ -33,5 +39,11 @@ void main() {
 
     // Test: Find text post time
     expect(find.text(DemoValues.postTime), findsOneWidget);
+
+    // Test: Find post react number
+    expect(find.text(DemoValues.postReacts.toString()), findsOneWidget);
+
+    // Test: Find post view number
+    expect(find.text(DemoValues.postViews.toString()), findsOneWidget);
   });
 }
