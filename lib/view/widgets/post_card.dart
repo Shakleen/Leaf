@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:leaf/helper/demo_values.dart';
+import 'package:leaf/model/post_model.dart';
 import 'package:leaf/view/pages/post_page.dart';
 import 'package:leaf/view/presentation/themes.dart';
+import 'package:leaf/view/widgets/inherited_widgets/inherited_post_model.dart';
 
 bool _isLandscape(BuildContext context) =>
     MediaQuery.of(context).orientation == Orientation.landscape;
 
 class PostCard extends StatelessWidget {
-  const PostCard({Key key}) : super(key: key);
+  final PostModel postData;
+
+  const PostCard({Key key, @required this.postData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +18,10 @@ class PostCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(
-          builder: (BuildContext context) {
-            return PostPage();
-          }
-        ));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) {
+          return PostPage();
+        }));
       },
       child: AspectRatio(
         aspectRatio: aspectRatio,
@@ -28,12 +30,15 @@ class PostCard extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.all(4.0),
             padding: const EdgeInsets.all(4.0),
-            child: Column(
-              children: <Widget>[
-                _Post(),
-                Divider(color: Colors.grey),
-                _PostDetails(),
-              ],
+            child: InheritedPostModel(
+              postData: postData,
+              child: Column(
+                children: <Widget>[
+                  _Post(),
+                  Divider(color: Colors.grey),
+                  _PostDetails(),
+                ],
+              ),
             ),
           ),
         ),
@@ -59,10 +64,11 @@ class _PostTitleSummaryAndTime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PostModel postData = InheritedPostModel.of(context).postData;
     final TextStyle titleTheme = Theme.of(context).textTheme.title;
     final TextStyle summaryTheme = Theme.of(context).textTheme.body1;
-    final String title = DemoValues.postTitle;
-    final String summary = DemoValues.postSummary;
+    final String title = postData.title;
+    final String summary = postData.summary;
     final int flex = _isLandscape(context) ? 5 : 3;
 
     return Expanded(
@@ -95,7 +101,8 @@ class _PostImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(flex: 2, child: Image.asset(DemoValues.postImage));
+    final PostModel postData = InheritedPostModel.of(context).postData;
+    return Expanded(flex: 2, child: Image.asset(postData.imageURL));
   }
 }
 
@@ -115,6 +122,7 @@ class _UserNameAndEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PostModel postData = InheritedPostModel.of(context).postData;
     final TextStyle nameTheme = Theme.of(context).textTheme.subtitle;
     final TextStyle emailTheme = Theme.of(context).textTheme.body1;
     final int flex = _isLandscape(context) ? 10 : 5;
@@ -127,9 +135,9 @@ class _UserNameAndEmail extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(DemoValues.userName, style: nameTheme),
+            Text(postData.author.name, style: nameTheme),
             SizedBox(height: 2.0),
-            Text(DemoValues.userEmail, style: emailTheme),
+            Text(postData.author.email, style: emailTheme),
           ],
         ),
       ),
@@ -142,9 +150,10 @@ class _UserImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PostModel postData = InheritedPostModel.of(context).postData;
     return Expanded(
       flex: 1,
-      child: CircleAvatar(backgroundImage: AssetImage(DemoValues.userImage)),
+      child: CircleAvatar(backgroundImage: AssetImage(postData.author.image)),
     );
   }
 }
@@ -154,11 +163,13 @@ class _PostTimeStamp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PostModel postData = InheritedPostModel.of(context).postData;
     final TextStyle timeTheme = TextThemes.dateStyle;
+
     return Container(
       width: double.infinity,
       child: Text(
-        DemoValues.postTime,
+        postData.postTime.toString(),
         style: timeTheme,
         textAlign: TextAlign.end,
       ),
@@ -171,6 +182,8 @@ class _PostStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PostModel postData = InheritedPostModel.of(context).postData;
+    
     return Expanded(
       flex: 2,
       child: Row(
@@ -178,12 +191,12 @@ class _PostStats extends StatelessWidget {
         children: <Widget>[
           _ShowStat(
             icon: Icons.favorite,
-            number: DemoValues.postReacts,
+            number: postData.reacts,
             color: Colors.red,
           ),
           _ShowStat(
             icon: Icons.remove_red_eye,
-            number: DemoValues.postViews,
+            number: postData.views,
             color: Colors.green[900],
           ),
         ],
