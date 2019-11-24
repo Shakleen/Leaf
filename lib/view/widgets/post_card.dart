@@ -20,7 +20,7 @@ class PostCard extends StatelessWidget {
       onTap: () {
         Navigator.push(context,
             MaterialPageRoute(builder: (BuildContext context) {
-          return PostPage();
+          return PostPage(postData: postData);
         }));
       },
       child: AspectRatio(
