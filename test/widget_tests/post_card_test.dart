@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leaf/helper/demo_values.dart';
+import 'package:leaf/model/post_model.dart';
 import 'package:leaf/view/widgets/post_card.dart';
 
 void main() {
   testWidgets("Testing PostCard widget", (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: PostCard()));
+    final PostModel postData = DemoValues.posts[0];
+
+    await tester.pumpWidget(MaterialApp(home: PostCard(postData: postData)));
 
     // Test: Finds GestureDetector
     expect(find.byType(GestureDetector), findsOneWidget);
@@ -29,24 +32,24 @@ void main() {
     expect(find.byIcon(Icons.remove_red_eye), findsOneWidget);
 
     // Test: Find text user name
-    expect(find.text(DemoValues.userName), findsOneWidget);
+    expect(find.text(postData.author.name), findsOneWidget);
 
     // Test: Find text user email
-    expect(find.text(DemoValues.userEmail), findsOneWidget);
+    expect(find.text(postData.author.email), findsOneWidget);
 
     // Test: Find text post title
-    expect(find.text(DemoValues.postTime), findsOneWidget);
+    expect(find.text(postData.title), findsOneWidget);
 
     // Test: Find text post summary
-    expect(find.text(DemoValues.postSummary), findsOneWidget);
+    expect(find.text(postData.summary), findsOneWidget);
 
     // Test: Find text post time
-    expect(find.text(DemoValues.postTime), findsOneWidget);
+    expect(find.text(postData.postTime.toString()), findsOneWidget);
 
     // Test: Find post react number
-    expect(find.text(DemoValues.postReacts.toString()), findsOneWidget);
+    expect(find.text(postData.reacts.toString()), findsOneWidget);
 
     // Test: Find post view number
-    expect(find.text(DemoValues.postViews.toString()), findsOneWidget);
+    expect(find.text(postData.views.toString()), findsOneWidget);
   });
 }
