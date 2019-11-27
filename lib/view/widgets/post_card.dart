@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:leaf/helper/common.dart';
 import 'package:leaf/model/post_model.dart';
 import 'package:leaf/view/pages/post_page.dart';
-import 'package:leaf/view/presentation/themes.dart';
 import 'package:leaf/view/widgets/inherited_widgets/inherited_post_model.dart';
+import 'package:leaf/view/widgets/post_stats.dart';
+import 'package:leaf/view/widgets/post_time_stamp.dart';
+import 'package:leaf/view/widgets/user_details.dart';
 
-bool _isLandscape(BuildContext context) =>
-    MediaQuery.of(context).orientation == Orientation.landscape;
 
 class PostCard extends StatelessWidget {
   final PostModel postData;
@@ -14,7 +15,7 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double aspectRatio = _isLandscape(context) ? 6 / 2 : 6 / 3;
+    final double aspectRatio = isLandscape(context) ? 6 / 2 : 6 / 3;
 
     return GestureDetector(
       onTap: () {
@@ -69,7 +70,7 @@ class _PostTitleSummaryAndTime extends StatelessWidget {
     final TextStyle summaryTheme = Theme.of(context).textTheme.body1;
     final String title = postData.title;
     final String summary = postData.summary;
-    final int flex = _isLandscape(context) ? 5 : 3;
+    final int flex = isLandscape(context) ? 5 : 3;
 
     return Expanded(
       flex: flex,
@@ -88,7 +89,7 @@ class _PostTitleSummaryAndTime extends StatelessWidget {
                 Text(summary, style: summaryTheme),
               ],
             ),
-            _PostTimeStamp(),
+            PostTimeStamp(),
           ],
         ),
       ),
@@ -112,120 +113,9 @@ class _PostDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: <Widget>[_UserImage(), _UserNameAndEmail(), _PostStats()],
-    );
-  }
-}
-
-class _UserNameAndEmail extends StatelessWidget {
-  const _UserNameAndEmail({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final PostModel postData = InheritedPostModel.of(context).postData;
-    final TextStyle nameTheme = Theme.of(context).textTheme.subtitle;
-    final TextStyle emailTheme = Theme.of(context).textTheme.body1;
-    final int flex = _isLandscape(context) ? 10 : 5;
-
-    return Expanded(
-      flex: flex,
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(postData.author.name, style: nameTheme),
-            SizedBox(height: 2.0),
-            Text(postData.author.email, style: emailTheme),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _UserImage extends StatelessWidget {
-  const _UserImage({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final PostModel postData = InheritedPostModel.of(context).postData;
-    return Expanded(
-      flex: 1,
-      child: CircleAvatar(backgroundImage: AssetImage(postData.author.image)),
-    );
-  }
-}
-
-class _PostTimeStamp extends StatelessWidget {
-  const _PostTimeStamp({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final PostModel postData = InheritedPostModel.of(context).postData;
-    final TextStyle timeTheme = TextThemes.dateStyle;
-
-    return Container(
-      width: double.infinity,
-      child: Text(
-        postData.postTime.toString(),
-        style: timeTheme,
-        textAlign: TextAlign.end,
-      ),
-    );
-  }
-}
-
-class _PostStats extends StatelessWidget {
-  const _PostStats({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final PostModel postData = InheritedPostModel.of(context).postData;
-    
-    return Expanded(
-      flex: 2,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _ShowStat(
-            icon: Icons.favorite,
-            number: postData.reacts,
-            color: Colors.red,
-          ),
-          _ShowStat(
-            icon: Icons.remove_red_eye,
-            number: postData.views,
-            color: Colors.green[900],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ShowStat extends StatelessWidget {
-  final IconData icon;
-  final int number;
-  final Color color;
-
-  const _ShowStat({
-    Key key,
-    @required this.icon,
-    @required this.number,
-    @required this.color,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(right: 2.0),
-          child: Icon(icon, color: color),
-        ),
-        Text(number.toString()),
+        Expanded(flex: 3, child: UserDetails()),
+        Expanded(flex: 1, child: PostStats()),
       ],
     );
   }
