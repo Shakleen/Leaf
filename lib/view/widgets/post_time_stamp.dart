@@ -14,7 +14,7 @@ class PostTimeStamp extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Text(
-        postData.postTime.toString(),
+        postData.postTimeFormatted,
         style: timeTheme,
         textAlign: TextAlign.end,
       ),

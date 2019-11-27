@@ -4,22 +4,31 @@ import 'package:leaf/view/pages/home_page.dart';
 import 'package:leaf/view/widgets/post_card.dart';
 
 void main() {
-  testWidgets("Testing HomePage widget", (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: HomePage()));
+  group("Testing HomePage widget", () {
+    testWidgets("Exactly one Scaffold widget", (WidgetTester tester) async {
+      _runTest(tester, () => expect(find.byType(Scaffold), findsOneWidget));
+    });
 
-    // Test: Scaffold widget presence
-    expect(find.byType(Scaffold), findsOneWidget);
-
-    // Test: AppBar widget presence
-    expect(find.byType(AppBar), findsOneWidget);
-
-    // Test: "Leaf" text presence
-    expect(find.text("Leaf"), findsOneWidget);
-
-    // Test: ListView presence
-    expect(find.byType(ListView), findsOneWidget);
-
-    // Test: PostCard presence
-    expect(find.byType(PostCard), findsWidgets);
+    testWidgets("Exactly one AppBar widget", (WidgetTester tester) async {
+      _runTest(tester, () => expect(find.byType(AppBar), findsOneWidget));
+    });
+    
+    testWidgets("Exactly one Leaf text", (WidgetTester tester) async {
+      _runTest(tester, () => expect(find.text("Leaf"), findsOneWidget));
+    });
+    
+    testWidgets("Exactly one ListView widget", (WidgetTester tester) async {
+      _runTest(tester, () => expect(find.byType(ListView), findsOneWidget));
+    });
+    
+    testWidgets("Atleast one PostCard widget", (WidgetTester tester) async {
+      _runTest(tester, () => expect(find.byType(PostCard), findsWidgets));
+    });
+    
   });
+}
+
+void _runTest(WidgetTester tester, Function test) async {
+  await tester.pumpWidget(MaterialApp(home: HomePage()));
+  test();
 }
