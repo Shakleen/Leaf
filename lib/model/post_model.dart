@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:leaf/model/user_model.dart';
 
 class PostModel {
-  final String id;
-  final String title;
-  final String summary;
-  final String body;
-  final String imageURL;
+  final String id, title, summary, body, imageURL;
   final DateTime postTime;
-  final int reacts;
-  final int views;
+  final int reacts, views;
   final UserModel author;
 
   const PostModel({
@@ -23,4 +19,6 @@ class PostModel {
     @required this.reacts,
     @required this.views,
   });
+
+  String get postTimeFormatted => DateFormat.yMMMMEEEEd().format(postTime);
 }
