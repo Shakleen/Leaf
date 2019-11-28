@@ -89,7 +89,7 @@ class _PostTitleSummaryAndTime extends StatelessWidget {
                 Text(summary, style: summaryTheme),
               ],
             ),
-            PostTimeStamp(),
+            PostTimeStamp(alignment: Alignment.centerRight),
           ],
         ),
       ),
