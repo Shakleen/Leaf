@@ -7,3 +7,5 @@ flutter test ./test/widget_tests/main_test.dart
 flutter test ./test/widget_tests/home_page_test.dart
 flutter test ./test/widget_tests/post_card_test.dart
 flutter test ./test/widget_tests/post_page_test.dart
+flutter test ./test/widget_tests/comments_list_test.dart
+flutter test ./test/widget_tests/user_details_with_follow_test.dart

@@ -4,25 +4,16 @@ import 'package:leaf/main.dart';
 import 'package:leaf/view/pages/home_page.dart';
 
 void main() {
+  final Widget testWidget = Leaf();
   group("Testing Leaf widget", () {
-    testWidgets(
-      "Exactly One MaterialApp widget",
-      (WidgetTester tester) async {
-        _runTest(
-            tester, () => expect(find.byType(MaterialApp), findsOneWidget));
-      },
-    );
+    testWidgets("Exactly One MaterialApp", (WidgetTester tester) async {
+      await tester.pumpWidget(testWidget);
+      expect(find.byType(MaterialApp), findsOneWidget);
+    });
 
-    testWidgets(
-      "Exactly one HomePage widget",
-      (WidgetTester tester) async {
-        _runTest(tester, () => expect(find.byType(HomePage), findsOneWidget));
-      },
-    );
+    testWidgets("Exactly one HomePage", (WidgetTester tester) async {
+      await tester.pumpWidget(testWidget);
+      expect(find.byType(HomePage), findsOneWidget);
+    });
   });
-}
-
-void _runTest(WidgetTester tester, Function test) async {
-  await tester.pumpWidget(Leaf());
-  test();
 }

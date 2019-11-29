@@ -4,7 +4,12 @@ import 'package:leaf/view/presentation/themes.dart';
 import 'package:leaf/view/widgets/inherited_widgets/inherited_post_model.dart';
 
 class PostTimeStamp extends StatelessWidget {
-  const PostTimeStamp({Key key}) : super(key: key);
+  final Alignment alignment;
+
+  const PostTimeStamp({
+    Key key,
+    this.alignment = Alignment.centerLeft,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +18,8 @@ class PostTimeStamp extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      child: Text(
-        postData.postTimeFormatted,
-        style: timeTheme,
-        textAlign: TextAlign.end,
-      ),
+      alignment: alignment,
+      child: Text(postData.postTimeFormatted, style: timeTheme),
     );
   }
 }
