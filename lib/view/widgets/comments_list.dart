@@ -19,7 +19,10 @@ class CommentsList extends StatelessWidget {
         title: Text("Comments"),
         children: List<Widget>.generate(
           comments.length,
-          (int index) => _SingleComment(index: index),
+          (int index) => _SingleComment(
+            key: ValueKey("Comment $index"),
+            index: index,
+          ),
         ),
       ),
     );
@@ -42,9 +45,19 @@ class _SingleComment extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          UserDetailsWithFollow(userData: commentData.user),
-          Text(commentData.comment, textAlign: TextAlign.left),
-          Divider(color: Colors.black45),
+          UserDetailsWithFollow(
+            key: ValueKey("Comment User $index"),
+            userData: commentData.user,
+          ),
+          Text(
+            commentData.comment,
+            key: ValueKey("Comment text $index"),
+            textAlign: TextAlign.left,
+          ),
+          Divider(
+            key: ValueKey("Comment divider $index"),
+            color: Colors.black45,
+          ),
         ],
       ),
     );
