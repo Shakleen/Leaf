@@ -3,6 +3,13 @@ import 'package:leaf/model/comment_model.dart';
 import 'package:leaf/view/widgets/inherited_widgets/inherited_post_model.dart';
 import 'package:leaf/view/widgets/user_details_with_follow.dart';
 
+class CommentsListKeyPrefix {
+  static final String singleComment = "Comment";
+  static final String commentUser = "Comment User";
+  static final String commentText = "Comment Text";
+  static final String commentDivider = "Comment Divider";
+}
+
 class CommentsList extends StatelessWidget {
   const CommentsList({Key key}) : super(key: key);
 
@@ -20,7 +27,7 @@ class CommentsList extends StatelessWidget {
         children: List<Widget>.generate(
           comments.length,
           (int index) => _SingleComment(
-            key: ValueKey("Comment $index"),
+            key: ValueKey("${CommentsListKeyPrefix.singleComment} $index"),
             index: index,
           ),
         ),
@@ -46,16 +53,16 @@ class _SingleComment extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           UserDetailsWithFollow(
-            key: ValueKey("Comment User $index"),
+            key: ValueKey("${CommentsListKeyPrefix.commentUser} $index"),
             userData: commentData.user,
           ),
           Text(
             commentData.comment,
-            key: ValueKey("Comment text $index"),
+            key: ValueKey("${CommentsListKeyPrefix.commentText} $index"),
             textAlign: TextAlign.left,
           ),
           Divider(
-            key: ValueKey("Comment divider $index"),
+            key: ValueKey("${CommentsListKeyPrefix.commentDivider} $index"),
             color: Colors.black45,
           ),
         ],

@@ -43,15 +43,27 @@ void main() {
       final Finder expansionTileFinder = find.byType(ExpansionTile);
       await tester.tap(expansionTileFinder);
       await tester.pump();
-      
+
       for (int i = 0; i < postData.comments.length; ++i) {
         await tester.drag(expansionTileFinder, const Offset(0, -75));
         await tester.pump();
 
-        expect(find.byKey(ValueKey("Comment $i")), findsOneWidget);
-        expect(find.byKey(ValueKey("Comment User $i")), findsOneWidget);
-        expect(find.byKey(ValueKey("Comment text $i")), findsOneWidget);
-        expect(find.byKey(ValueKey("Comment divider $i")), findsOneWidget);
+        expect(
+          find.byKey(ValueKey("${CommentsListKeyPrefix.singleComment} $i")),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(ValueKey("${CommentsListKeyPrefix.commentUser} $i")),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(ValueKey("${CommentsListKeyPrefix.commentText} $i")),
+          findsOneWidget,
+        );
+        expect(
+          find.byKey(ValueKey("${CommentsListKeyPrefix.commentDivider} $i")),
+          findsOneWidget,
+        );
       }
     });
   });
