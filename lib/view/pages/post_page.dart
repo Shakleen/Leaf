@@ -11,6 +11,12 @@ class PostPageKeys {
   static final ValueKey wholePage = ValueKey("wholePage");
   static final ValueKey bannerImage = ValueKey("bannerImage");
   static final ValueKey summary = ValueKey("summary");
+  static final ValueKey postTimeStamp = ValueKey("postTimeStamp");
+  static final ValueKey mainBody = ValueKey("mainBody");
+  static final ValueKey userDetailsWithFollow =
+      ValueKey("userDetailsWithFollow");
+  static final ValueKey postStats = ValueKey("postStats");
+  static final ValueKey commentsList = ValueKey("commentsList");
 }
 
 class PostPage extends StatelessWidget {
@@ -49,12 +55,15 @@ class _NonImageContents extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _Summary(key: PostPageKeys.summary),
-          PostTimeStamp(),
-          _MainBody(),
-          UserDetailsWithFollow(userData: postData.author),
+          PostTimeStamp(key: PostPageKeys.postTimeStamp),
+          _MainBody(key: PostPageKeys.mainBody),
+          UserDetailsWithFollow(
+            key: PostPageKeys.userDetailsWithFollow,
+            userData: postData.author,
+          ),
           SizedBox(height: 8.0),
-          PostStats(),
-          CommentsList(),
+          PostStats(key: PostPageKeys.postStats),
+          CommentsList(key: PostPageKeys.commentsList),
         ],
       ),
     );
