@@ -3,7 +3,7 @@ import 'package:leaf/model/post_model.dart';
 import 'package:leaf/model/user_model.dart';
 
 class DemoValues {
-  static final List<UserModel> _users = [
+  static final List<UserModel> users = [
     UserModel(
       id: "1",
       name: "Ishfar",
@@ -50,50 +50,50 @@ Repudiandae sint soluta ullam sunt eos id laborum. Veniam molestiae ipsa odit so
     CommentModel(
       comment:
           "Et hic et sequi inventore. Molestiae laboriosam commodi exercitationem eum. ",
-      user: _users[0],
+      user: users[0],
       time: DateTime(2019, 4, 30),
     ),
     CommentModel(
       comment: "Unde id provident ut sunt in consequuntur qui sed. ",
-      user: _users[1],
+      user: users[1],
       time: DateTime(2018, 5, 30),
     ),
     CommentModel(
       comment: "Eveniet nesciunt distinctio sint ut. ",
-      user: _users[0],
+      user: users[0],
       time: DateTime(2017, 6, 30),
     ),
     CommentModel(
       comment: "Et facere a eos accusantium culpa quaerat in fugiat suscipit. ",
-      user: _users[2],
+      user: users[2],
       time: DateTime(2019, 4, 30),
     ),
     CommentModel(
       comment: "Necessitatibus pariatur harum deserunt cum illum ut.",
-      user: _users[1],
+      user: users[1],
       time: DateTime(2018, 5, 30),
     ),
     CommentModel(
       comment:
           "Accusantium neque quis provident voluptatem labore quod dignissimos eum quaerat. ",
-      user: _users[2],
+      user: users[2],
       time: DateTime(2017, 6, 30),
     ),
     CommentModel(
       comment:
           "Accusantium neque quis provident voluptatem labore quod dignissimos eum quaerat. ",
-      user: _users[1],
+      user: users[1],
       time: DateTime(2019, 4, 30),
     ),
     CommentModel(
       comment: "Neque est ut rerum vel sunt harum voluptatibus et. ",
-      user: _users[0],
+      user: users[0],
       time: DateTime(2018, 5, 30),
     ),
     CommentModel(
       comment:
           "Hic accusantium minus fuga exercitationem id aut expedita doloribus. ",
-      user: _users[1],
+      user: users[1],
       time: DateTime(2017, 6, 30),
     ),
   ];
@@ -101,7 +101,7 @@ Repudiandae sint soluta ullam sunt eos id laborum. Veniam molestiae ipsa odit so
   static final List<PostModel> posts = [
     PostModel(
       id: "1",
-      author: _users[0],
+      author: users[0],
       title: "Maple Trees",
       summary: "An in-depth study on maple trees.",
       body: "This is a short body.",
@@ -113,7 +113,7 @@ Repudiandae sint soluta ullam sunt eos id laborum. Veniam molestiae ipsa odit so
     ),
     PostModel(
       id: "2",
-      author: _users[1],
+      author: users[1],
       title: "Oak Trees",
       summary: "Preaching about oak trees",
       body: _body,
@@ -125,7 +125,7 @@ Repudiandae sint soluta ullam sunt eos id laborum. Veniam molestiae ipsa odit so
     ),
     PostModel(
       id: "3",
-      author: _users[2],
+      author: users[2],
       title: "Mango Trees",
       summary: "Gives shadow and fruit. Absolute win, no?",
       body: _body * 2,
