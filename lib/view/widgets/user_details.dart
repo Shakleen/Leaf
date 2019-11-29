@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:leaf/helper/common.dart';
-import 'package:leaf/model/post_model.dart';
-import 'package:leaf/view/widgets/inherited_widgets/inherited_post_model.dart';
+import 'package:leaf/model/user_model.dart';
+import 'package:leaf/view/widgets/inherited_widgets/inherited_user_model.dart';
 
 class UserDetails extends StatelessWidget {
-  const UserDetails({
-    Key key,
-  }) : super(key: key);
+  final UserModel userData;
+
+  const UserDetails({Key key, @required this.userData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(children: <Widget>[_UserImage(), _UserNameAndEmail()]),
+    return InheritedUserModel(
+      userData: userData,
+      child: Container(
+        child: Row(children: <Widget>[_UserImage(), _UserNameAndEmail()]),
+      ),
     );
   }
 }
@@ -21,7 +24,7 @@ class _UserNameAndEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PostModel postData = InheritedPostModel.of(context).postData;
+    final UserModel userData = InheritedUserModel.of(context).userData;
     final TextStyle nameTheme = Theme.of(context).textTheme.subtitle;
     final TextStyle emailTheme = Theme.of(context).textTheme.body1;
     final int flex = isLandscape(context) ? 10 : 5;
@@ -34,9 +37,9 @@ class _UserNameAndEmail extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(postData.author.name, style: nameTheme),
+            Text(userData.name, style: nameTheme),
             SizedBox(height: 2.0),
-            Text(postData.author.email, style: emailTheme),
+            Text(userData.email, style: emailTheme),
           ],
         ),
       ),
@@ -49,10 +52,10 @@ class _UserImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PostModel postData = InheritedPostModel.of(context).postData;
+    final UserModel userData = InheritedUserModel.of(context).userData;
     return Expanded(
       flex: 1,
-      child: CircleAvatar(backgroundImage: AssetImage(postData.author.image)),
+      child: CircleAvatar(backgroundImage: AssetImage(userData.image)),
     );
   }
 }

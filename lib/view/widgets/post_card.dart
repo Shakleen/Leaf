@@ -7,7 +7,6 @@ import 'package:leaf/view/widgets/post_stats.dart';
 import 'package:leaf/view/widgets/post_time_stamp.dart';
 import 'package:leaf/view/widgets/user_details.dart';
 
-
 class PostCard extends StatelessWidget {
   final PostModel postData;
 
@@ -112,9 +111,11 @@ class _PostDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PostModel postData = InheritedPostModel.of(context).postData;
+
     return Row(
       children: <Widget>[
-        Expanded(flex: 3, child: UserDetails()),
+        Expanded(flex: 3, child: UserDetails(userData: postData.author)),
         Expanded(flex: 1, child: PostStats()),
       ],
     );

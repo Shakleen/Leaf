@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:leaf/model/comment_model.dart';
 import 'package:leaf/model/post_model.dart';
+import 'package:leaf/model/user_model.dart';
 import 'package:leaf/view/presentation/themes.dart';
 import 'package:leaf/view/widgets/inherited_widgets/inherited_post_model.dart';
 import 'package:leaf/view/widgets/post_stats.dart';
@@ -26,12 +28,12 @@ class PostPage extends StatelessWidget {
 }
 
 class _NonImageContents extends StatelessWidget {
-  const _NonImageContents({
-    Key key,
-  }) : super(key: key);
+  const _NonImageContents({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final PostModel postData = InheritedPostModel.of(context).postData;
+
     return Container(
       margin: const EdgeInsets.all(8.0),
       child: Column(
@@ -40,9 +42,10 @@ class _NonImageContents extends StatelessWidget {
           _Summary(),
           PostTimeStamp(),
           _MainBody(),
-          _AuthorDetails(),
+          _AuthorDetails(author: postData.author),
+          SizedBox(height: 8.0),
           PostStats(),
-          _Comments(),
+          Comments(),
         ],
       ),
     );
@@ -91,40 +94,34 @@ class _MainBody extends StatelessWidget {
 }
 
 class _AuthorDetails extends StatelessWidget {
-  const _AuthorDetails({Key key}) : super(key: key);
+  final UserModel author;
+
+  const _AuthorDetails({Key key, @required this.author}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: UserDetails(),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                icon: Icon(Icons.group_add),
-                onPressed: () {},
-              ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Expanded(flex: 2, child: UserDetails(userData: author)),
+        Expanded(
+          flex: 1,
+          child: Container(
+            alignment: Alignment.centerRight,
+            child: IconButton(
+              icon: Icon(Icons.group_add),
+              onPressed: () {},
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
 
-class _Comments extends StatelessWidget {
-  const _Comments({
-    Key key,
-  }) : super(key: key);
+class Comments extends StatelessWidget {
+  const Comments({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -146,13 +143,14 @@ class _Comments extends StatelessWidget {
 }
 
 class _SingleComment extends StatelessWidget {
-  const _SingleComment({Key key, @required this.index}) : super(key: key);
-
   final int index;
+
+  const _SingleComment({Key key, @required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final PostModel postData = InheritedPostModel.of(context).postData;
+    final CommentModel commentData =
+        InheritedPostModel.of(context).postData.comments[index];
 
     return Container(
       width: double.infinity,
@@ -160,8 +158,8 @@ class _SingleComment extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _AuthorDetails(),
-          Text(postData.comments[index].comment, textAlign: TextAlign.left),
+          _AuthorDetails(author: commentData.user),
+          Text(commentData.comment, textAlign: TextAlign.left),
           Divider(color: Colors.black45),
         ],
       ),
