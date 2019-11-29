@@ -8,6 +8,12 @@ import 'package:leaf/view/widgets/post_stats.dart';
 import 'package:leaf/view/widgets/post_time_stamp.dart';
 import 'package:leaf/view/widgets/user_details.dart';
 
+class PostPageKeys {
+  static final ValueKey wholePage = ValueKey("wholePage");
+  static final ValueKey bannerImage = ValueKey("bannerImage");
+  static final ValueKey summary = ValueKey("summary");
+}
+
 class PostPage extends StatelessWidget {
   final PostModel postData;
 
@@ -20,7 +26,11 @@ class PostPage extends StatelessWidget {
       body: InheritedPostModel(
         postData: postData,
         child: ListView(
-          children: <Widget>[_BannerImage(), _NonImageContents()],
+          key: PostPageKeys.wholePage,
+          children: <Widget>[
+            _BannerImage(key: PostPageKeys.bannerImage),
+            _NonImageContents(),
+          ],
         ),
       ),
     );
@@ -39,7 +49,7 @@ class _NonImageContents extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _Summary(),
+          _Summary(key: PostPageKeys.summary),
           PostTimeStamp(),
           _MainBody(),
           _AuthorDetails(author: postData.author),

@@ -9,28 +9,28 @@ final PostModel postData = DemoValues.posts[0];
 void main() {
   group("Testing PostPage widget", () {
     testWidgets("Exactly one Scaffold widget", (WidgetTester tester) async {
-      _runTest(tester, () => expect(find.byType(Scaffold), findsOneWidget));
+      await tester.pumpWidget(MaterialApp(home: PostPage(postData: postData)));
+      expect(find.byType(Scaffold), findsOneWidget);
     });
 
-    testWidgets("Exactly one Scaffold widget", (WidgetTester tester) async {
-      _runTest(tester, () => expect(find.byType(AppBar), findsOneWidget));
-    });
-
-    testWidgets("Exactly one Scaffold widget", (WidgetTester tester) async {
-      _runTest(tester, () => expect(find.byType(Text), findsNWidgets(2)));
-    });
-
-    testWidgets("Exactly one Scaffold widget", (WidgetTester tester) async {
-      _runTest(tester, () => expect(find.text("Leaf"), findsOneWidget));
+    testWidgets("Exactly one AppBar widget", (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: PostPage(postData: postData)));
+      expect(find.byType(AppBar), findsOneWidget);
     });
     
-    testWidgets("Exactly one Scaffold widget", (WidgetTester tester) async {
-      _runTest(tester, () => expect(find.text(postData.title), findsOneWidget));
+    testWidgets("Exactly one title text", (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: PostPage(postData: postData)));
+      expect(find.text(postData.title), findsOneWidget);
+    });
+    
+    testWidgets("Exactly one whole page widget", (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: PostPage(postData: postData)));
+      expect(find.byKey(PostPageKeys.wholePage), findsOneWidget);
+    });
+    
+    testWidgets("Exactly one BannerImage widget", (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: PostPage(postData: postData)));
+      expect(find.byKey(PostPageKeys.bannerImage), findsOneWidget);
     });
   });
-}
-
-void _runTest(WidgetTester tester, Function test) async {
-  await tester.pumpWidget(MaterialApp(home: PostPage(postData: postData)));
-  test();
 }
