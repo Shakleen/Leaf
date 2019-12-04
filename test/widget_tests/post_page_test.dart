@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leaf/helper/demo_values.dart';
+import 'package:leaf/helper/keys.dart';
 import 'package:leaf/model/post_model.dart';
 import 'package:leaf/view/pages/post_page.dart';
 import 'package:leaf/view/widgets/comments_list.dart';
@@ -30,19 +31,22 @@ void main() {
 
     testWidgets("Exactly one whole page widget", (WidgetTester tester) async {
       await tester.pumpWidget(testWidget);
-      expect(find.byKey(PostPageKeys.wholePage), findsOneWidget);
+      final ValueKey key = ValueKey(PostPageKeys.wholePage);
+      expect(find.byKey(key), findsOneWidget);
     });
 
     testWidgets("Exactly one BannerImage widget", (WidgetTester tester) async {
       await tester.pumpWidget(testWidget);
-      expect(find.byKey(PostPageKeys.bannerImage), findsOneWidget);
+      final ValueKey key = ValueKey(PostPageKeys.bannerImage);
+      expect(find.byKey(key), findsOneWidget);
     });
 
     testWidgets("Exactly one Summary widget", (WidgetTester tester) async {
       await tester.pumpWidget(testWidget);
       await tester.drag(find.byType(ListView), Offset(0, -100));
       await tester.pump();
-      expect(find.byKey(PostPageKeys.summary), findsOneWidget);
+      final ValueKey key = ValueKey(PostPageKeys.summary);
+      expect(find.byKey(key), findsOneWidget);
     });
 
     testWidgets("Exactly one PostTimeStamp widget",
@@ -57,7 +61,8 @@ void main() {
       await tester.pumpWidget(testWidget);
       await tester.drag(find.byType(ListView), Offset(0, -100));
       await tester.pump();
-      expect(find.byKey(PostPageKeys.mainBody), findsOneWidget);
+      final ValueKey key = ValueKey(PostPageKeys.mainBody);
+      expect(find.byKey(key), findsOneWidget);
     });
 
     testWidgets("Exactly one UserDetailsWithFollow widget",

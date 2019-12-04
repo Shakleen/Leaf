@@ -16,3 +16,7 @@ class PostPageKeys {
   static final String summary = "summary";
   static final String mainBody = "mainBody";
 }
+
+class PageKeys {
+  static final String homePage = "homePage";
+}

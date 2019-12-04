@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leaf/helper/keys.dart';
 import 'package:leaf/view/pages/home_page.dart';
 import 'package:leaf/view/presentation/themes.dart';
 
@@ -19,7 +20,7 @@ class Leaf extends StatelessWidget {
           body1: TextThemes.body1,
         ),
       ),
-      home: HomePage(),
+      home: HomePage(key: ValueKey(PageKeys.homePage)),
     );
   }
 }
