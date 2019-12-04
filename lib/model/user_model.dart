@@ -1,23 +1,19 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class UserModel {
-  final String id;
-  final String name;
-  final String email;
-  final String image;
+  final String id, name, email, image;
   final int followers;
   final DateTime joined;
   final int posts;
 
   const UserModel({
-    @required this.id,
-    @required this.name,
-    @required this.email,
-    @required this.image,
-    @required this.followers,
-    @required this.joined,
-    @required this.posts,
+    this.id,
+    this.name,
+    this.email,
+    this.image,
+    this.followers,
+    this.joined,
+    this.posts,
   });
 
   String get postTimeFormatted => DateFormat.yMMMMEEEEd().format(joined);

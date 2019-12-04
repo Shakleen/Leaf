@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:leaf/model/user_model.dart';
 
 class CommentModel {
@@ -6,9 +5,5 @@ class CommentModel {
   final String comment;
   final DateTime time;
 
-  const CommentModel({
-    @required this.user,
-    @required this.comment,
-    @required this.time,
-  });
+  const CommentModel({this.user, this.comment, this.time});
 }
