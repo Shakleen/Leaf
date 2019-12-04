@@ -20,3 +20,7 @@ class PostPageKeys {
 class PageKeys {
   static final String homePage = "homePage";
 }
+
+class HomePageKeys {
+  static final String appBarTitle = "homePage appBarTitle";
+}

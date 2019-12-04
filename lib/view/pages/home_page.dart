@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leaf/helper/demo_values.dart';
+import 'package:leaf/helper/keys.dart';
 import 'package:leaf/view/widgets/post_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,7 +10,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Leaf"),
+        title: Text(
+          "Leaf",
+          key: ValueKey(HomePageKeys.appBarTitle),
+        ),
       ),
       body: ListView.builder(
         itemCount: DemoValues.posts.length,

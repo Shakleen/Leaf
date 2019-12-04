@@ -1,4 +1,5 @@
 import 'package:flutter_driver/flutter_driver.dart';
+import 'package:leaf/helper/keys.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -15,6 +16,13 @@ void main() {
       if (driver != null) {
         driver.close();
       }
+    });
+
+    test('HomePage appbar has title Leaf', () async {
+      final String foundText = await driver.getText(
+        find.byValueKey(HomePageKeys.appBarTitle),
+      );
+      expect(foundText, "Leaf");
     });
   });
 }
