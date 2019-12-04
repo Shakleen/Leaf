@@ -6,10 +6,8 @@ import 'package:leaf/view/widgets/inherited_widgets/inherited_post_model.dart';
 class PostTimeStamp extends StatelessWidget {
   final Alignment alignment;
 
-  const PostTimeStamp({
-    Key key,
-    this.alignment = Alignment.centerLeft,
-  }) : super(key: key);
+  const PostTimeStamp({Key key, this.alignment = Alignment.centerLeft})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:leaf/helper/keys.dart';
 import 'package:leaf/model/comment_model.dart';
 import 'package:leaf/view/widgets/inherited_widgets/inherited_post_model.dart';
 import 'package:leaf/view/widgets/user_details_with_follow.dart';
-
-class CommentsListKeyPrefix {
-  static final String singleComment = "Comment";
-  static final String commentUser = "Comment User";
-  static final String commentText = "Comment Text";
-  static final String commentDivider = "Comment Divider";
-}
 
 class CommentsList extends StatelessWidget {
   const CommentsList({Key key}) : super(key: key);

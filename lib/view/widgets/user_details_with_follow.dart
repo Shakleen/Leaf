@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:leaf/helper/keys.dart';
 import 'package:leaf/model/user_model.dart';
 import 'package:leaf/view/widgets/user_details.dart';
-
-class UserDetailsWithFollowKeys {
-  static final ValueKey userDetails = ValueKey("UserDetails");
-  static final ValueKey follow = ValueKey("follow");
-}
 
 class UserDetailsWithFollow extends StatelessWidget {
   final UserModel userData;
@@ -22,14 +18,14 @@ class UserDetailsWithFollow extends StatelessWidget {
         Expanded(
           flex: 2,
           child: UserDetails(
-            key: UserDetailsWithFollowKeys.userDetails,
+            key: ValueKey(UserDetailsWithFollowKeys.userDetails),
             userData: userData,
           ),
         ),
         Expanded(
           flex: 1,
           child: Container(
-            key: UserDetailsWithFollowKeys.follow,
+            key: ValueKey(UserDetailsWithFollowKeys.follow),
             alignment: Alignment.centerRight,
             child: IconButton(
               icon: Icon(Icons.group_add),

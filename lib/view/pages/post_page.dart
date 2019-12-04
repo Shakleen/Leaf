@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leaf/helper/keys.dart';
 import 'package:leaf/model/post_model.dart';
 import 'package:leaf/view/presentation/themes.dart';
 import 'package:leaf/view/widgets/comments_list.dart';
@@ -6,13 +7,6 @@ import 'package:leaf/view/widgets/inherited_widgets/inherited_post_model.dart';
 import 'package:leaf/view/widgets/post_stats.dart';
 import 'package:leaf/view/widgets/post_time_stamp.dart';
 import 'package:leaf/view/widgets/user_details_with_follow.dart';
-
-class PostPageKeys {
-  static final ValueKey wholePage = ValueKey("wholePage");
-  static final ValueKey bannerImage = ValueKey("bannerImage");
-  static final ValueKey summary = ValueKey("summary");
-  static final ValueKey mainBody = ValueKey("mainBody");
-}
 
 class PostPage extends StatelessWidget {
   final PostModel postData;
@@ -26,9 +20,9 @@ class PostPage extends StatelessWidget {
       body: InheritedPostModel(
         postData: postData,
         child: ListView(
-          key: PostPageKeys.wholePage,
+          key: ValueKey(PostPageKeys.wholePage),
           children: <Widget>[
-            _BannerImage(key: PostPageKeys.bannerImage),
+            _BannerImage(key: ValueKey(PostPageKeys.bannerImage)),
             _NonImageContents(),
           ],
         ),
@@ -49,9 +43,9 @@ class _NonImageContents extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _Summary(key: PostPageKeys.summary),
+          _Summary(key: ValueKey(PostPageKeys.summary)),
           PostTimeStamp(),
-          _MainBody(key: PostPageKeys.mainBody),
+          _MainBody(key: ValueKey(PostPageKeys.mainBody)),
           UserDetailsWithFollow(
             userData: postData.author,
           ),
