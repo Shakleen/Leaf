@@ -15,6 +15,8 @@ class PostPageKeys {
   static final String bannerImage = "bannerImage";
   static final String summary = "summary";
   static final String mainBody = "mainBody";
+  static final String appBarTitle = "appBarTitle";
+  static final String backButton = "backButton";
 }
 
 class PageKeys {
@@ -23,4 +25,6 @@ class PageKeys {
 
 class HomePageKeys {
   static final String appBarTitle = "homePage appBarTitle";
+  static final String listView = "listView";
+  static final String postCard = "postCard";
 }

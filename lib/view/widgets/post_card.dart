@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leaf/helper/common.dart';
+import 'package:leaf/helper/keys.dart';
 import 'package:leaf/model/post_model.dart';
 import 'package:leaf/view/pages/post_page.dart';
 import 'package:leaf/view/widgets/inherited_widgets/inherited_post_model.dart';
@@ -18,10 +19,11 @@ class PostCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (BuildContext context) {
-          return PostPage(postData: postData);
-        }));
+        Navigator.push(context, MaterialPageRoute(
+          builder: (BuildContext context) {
+            return PostPage(postData: postData);
+          },
+        ));
       },
       child: AspectRatio(
         aspectRatio: aspectRatio,

@@ -16,7 +16,14 @@ class PostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(postData.title)),
+      appBar: AppBar(
+        title: Text(postData.title, key: ValueKey(PostPageKeys.appBarTitle)),
+        leading: IconButton(
+          key: ValueKey(PostPageKeys.backButton),
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: InheritedPostModel(
         postData: postData,
         child: ListView(
