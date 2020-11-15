@@ -14,9 +14,9 @@ class Leaf extends StatelessWidget {
         primaryColor: Colors.green,
         brightness: Brightness.light,
         textTheme: TextTheme(
-          title: TextThemes.title,
-          subtitle: TextThemes.subtitle,
-          body1: TextThemes.body1,
+          headline6: TextThemes.title,
+          subtitle2: TextThemes.subtitle,
+          bodyText2: TextThemes.body1,
         ),
       ),
       home: HomePage(),

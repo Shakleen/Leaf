@@ -12,8 +12,7 @@ class InheritedPostModel extends InheritedWidget {
   }) : super(key: key, child: child);
 
   static InheritedPostModel of(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(InheritedPostModel)
-        as InheritedPostModel);
+    return context.dependOnInheritedWidgetOfExactType<InheritedPostModel>();
   }
 
   @override

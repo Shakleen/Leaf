@@ -25,8 +25,8 @@ class _UserNameAndEmail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserModel userData = InheritedUserModel.of(context).userData;
-    final TextStyle nameTheme = Theme.of(context).textTheme.subtitle;
-    final TextStyle emailTheme = Theme.of(context).textTheme.body1;
+    final TextStyle nameTheme = Theme.of(context).textTheme.subtitle2;
+    final TextStyle emailTheme = Theme.of(context).textTheme.bodyText2;
     final int flex = isLandscape(context) ? 10 : 5;
 
     return Expanded(
